@@ -38,6 +38,7 @@ show_usage()
   echo " add    : Add a new token"
   echo " clip   : Copy OTP to clipboard"
   echo " show   : Show the current OTP"
+  echo " all 	: Show all available OTPs"
   echo " list   : List available tokens"
   echo " lock   : Lock an unencrypted token"
   echo " unlock : Unlock an encrypted token"
@@ -53,6 +54,8 @@ case $CMD in
   remove)
   ;;
   show)
+  ;;
+  all)
   ;;
   lock)
   ;;

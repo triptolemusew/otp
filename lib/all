@@ -1,0 +1,49 @@
+
+#!/bin/sh
+
+. `dirname $0`/simple_curses.sh
+
+OUTPUT="/dev/stdout"
+
+process_otp()
+{
+  get_otp $TOKEN
+  [ $TO_CLIPBOARD ] && copy_to_clipboard $OTP
+  return 0
+}
+
+TOKENS=$( find $TOKENFILES_DIR -maxdepth 1 -type f -exec echo {} \; )
+declare -a ACCOUNTS
+declare -a ACCOUNTS_REMAINING
+
+if [ -z "$TOKENS" ]; then
+  echo "No tokens found."
+  exit 1
+fi
+
+for token in $TOKENS; do
+  TOT=$( echo $token | sed 's/.*\///' | sed 's/\(.*\)\.enc/\1 [Encoded] (Deprecated)/' | sed 's/\(.*\)\.pbkdf2/\1/' )
+  ACCOUNTS+=($TOT)
+done
+
+ACCOUNTS_LENGTH=${#ACCOUNTS[@]}
+
+main() {
+	window "Available Accounts" "red" "50%"
+		for account in ${ACCOUNTS[@]}; do
+			TOKEN=$account
+			TOKEN_NAME=$account
+
+			get_token
+			remaining_seconds
+			process_otp
+
+			display_message=`printf "[%.2d] $OTP" $REMAINING`
+
+			append_tabbed "$account:$display_message" 2 
+		done
+	endwin
+}
+
+main_loop -t 1
+
