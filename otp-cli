@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+
 [ -d "$HOME/otp-cli" ] && APP_HOME="$HOME/otp-cli" # Old version compatibility
 [ -z $APP_HOME ] && APP_HOME="$HOME/.otp-cli"
 
