@@ -67,7 +67,7 @@ clean_env(){
     reset_colors
     tput cnorm
     tput cvvis
-    setterm -cursor on
+    # setterm -cursor on
 }
 #call on SIGINT and SIGKILL
 #it removes buffer before to stop
