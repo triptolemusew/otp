@@ -28,7 +28,7 @@ done
 ACCOUNTS_LENGTH=${#ACCOUNTS[@]}
 
 main() {
-	window "Available Accounts" "red" "50%"
+	window "Available Accounts" "red" "33%"
 		for account in ${ACCOUNTS[@]}; do
 			TOKEN=$account
 			TOKEN_NAME=$account
